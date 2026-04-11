@@ -1,0 +1,21 @@
+global:
+  # How frequently to pull data from our targets
+  scrape_interval: 10s 
+
+scrape_configs:
+  # 1. Scrape our custom Python application
+  - job_name: 'python_app'
+    static_configs:
+      # dockerised target and its coonfigured port ref Dockerfile / Docker desktop
+      - targets: ['python-app:5000']
+
+  # 2. Scrape cAdvisor for Docker infrastructure metrics
+  - job_name: 'docker_infrastructure'
+    static_configs:
+      # gemini advised to use cadviser for docker infra related metrics pocing this
+      - targets: ['cadvisor:8080']
+
+  # 3. scraping prometheus metrics from an component?
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
