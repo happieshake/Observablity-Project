@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # 1. Our custom Python application
+  python-app:
+    build: ./app
+    container_name: python-app
+    ports:
+      - "5000:5000"
+
+  # 2. cAdvisor for Docker infrastructure monitoring
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+      - "8080:8080"
+    volumes:
+      # cAdvisor needs read-only access to these host directories 
+      # so it can inspect how much CPU/Memory Docker containers are using
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true
+
+  # 3. Prometheus to scrape the metrics
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      # We mount our local configuration file into the Prometheus container
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  # 4. Grafana to visualize the metrics
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      # Setting a default password so we don't have to change it on first login
+      - GF_SECURITY_ADMIN_PASSWORD=admin
