@@ -3,11 +3,11 @@ global:
   scrape_interval: 10s 
 
 scrape_configs:
-  # 1. Scrape our custom Python application
+  # 1. Scrape our custom Python application 
   - job_name: 'python_app'
     static_configs:
       # dockerised target and its coonfigured port ref Dockerfile / Docker desktop
-      - targets: ['python-app:5000']
+      - targets: ['python-app:5005']
 
   # 2. Scrape cAdvisor for Docker infrastructure metrics
   - job_name: 'docker_infrastructure'

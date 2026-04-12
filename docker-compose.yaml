@@ -6,7 +6,7 @@ services:
     build: ./app
     container_name: python-app
     ports:
-      - "5000:5000"
+      - "5005:5005" #bug fix ref app.py
 
   # 2. cAdvisor for Docker infrastructure monitoring
   cadvisor:
@@ -32,7 +32,7 @@ services:
       - "9090:9090"
     volumes:
       # We mount our local configuration file into the Prometheus container
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
 
   # 4. Grafana to visualize the metrics
   grafana:

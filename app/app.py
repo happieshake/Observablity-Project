@@ -11,7 +11,7 @@ REQUEST_VISITS = Counter('my_app_visits_total', 'Total number of visits to the h
 def home():
     # 2. Every time someone visits this route, increment the counter by 1
     REQUEST_VISITS.inc()
-    return "Hello! I am a Python app, and I am being monitored."
+    return "Hello! I am a Python app, and I am being monitored "
 
 @app.route('/metrics')
 def metrics():
@@ -20,4 +20,4 @@ def metrics():
 
 if __name__ == '__main__':
     # Run the app on port 5000
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5005) #changing 5000 to 5005 becaus mac uses anative feature in 5000
