@@ -1,0 +1,29 @@
+groups:
+  - name: python_app_alerts
+    rules:
+      - alert: PythonAppDown
+        expr: up{job="python_app"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Python Flask Application Down"
+          description: "The Flask application has been down for more than 30 seconds."
+
+      - alert: HighTraffic
+        expr: rate(my_app_visits_total[1m]) > 5
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High Traffic Detected"
+          description: "Request rate is above 5 requests per second."
+
+      - alert: HighContainerCPU
+        expr: rate(container_cpu_usage_seconds_total{name="python-app"}[1m]) > 0.8
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU Usage"
+          description: "CPU usage for the python-app container is high."

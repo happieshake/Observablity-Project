@@ -12,8 +12,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy our application code to the current working directory 
 COPY app.py .
 
-# Tell Docker our app uses port 5000 applications uses 500 ref app.py
-EXPOSE 5005
+# Tell Docker our app uses port 5005 applications uses 5005 ref app.py
+EXPOSE 5225
 
 # The command to run our application
 CMD ["python", "app.py"]

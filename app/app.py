@@ -20,4 +20,4 @@ def metrics():
 
 if __name__ == '__main__':
     # Run the app on port 5000
-    app.run(host='0.0.0.0', port=5005) #changing 5000 to 5005 becaus mac uses anative feature in 5000
+    app.run(host='0.0.0.0', port=5225) #changing 5000 to 5005 becaus mac uses anative feature in 5000

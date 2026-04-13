@@ -6,7 +6,7 @@ services:
     build: ./app
     container_name: python-app
     ports:
-      - "5005:5005" #bug fix ref app.py
+      - "5225:5225" #bug fix ref app.py
 
   # 2. cAdvisor for Docker infrastructure monitoring
   cadvisor:
