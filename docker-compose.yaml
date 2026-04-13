@@ -43,3 +43,13 @@ services:
     environment:
       # Setting a default password so we don't have to change it on first login
       - GF_SECURITY_ADMIN_PASSWORD=admin
+
+  # 5. Alertmanager to handle alerts
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    ports:
+      - "9093:9093"
+    volumes:
+      # We mount our local configuration file into the Alertmanager container
+      - ./alertmanager.yaml:/etc/alertmanager/config.yml
